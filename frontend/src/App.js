@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { React, useState } from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const SearchBar = ({keyword, onChange}) => {
+  return(
+  <input className="SearchBar"
+      key="search-bar"
+      value={keyword}
+      placeholder={"Search news..."}
+      onChange={(e) => onChange(e.target.value)}
+  />
+  );
+}
+const App = () => {
+  const [searchVar, setSeatchVar] = useState("");
+  return(
+    <div>
+      <h1>Wpisano {searchVar}</h1>
+      <SearchBar
+        keyword={searchVar}
+        onChange={setSeatchVar}/>
     </div>
   );
 }
-
 export default App;
