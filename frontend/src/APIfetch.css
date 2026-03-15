@@ -1,0 +1,25 @@
+.App {
+    text-align: center;
+    /* color: Green; */
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.item {
+    min-width: 33rem;
+    text-align: left;
+}
+.pokeFetch {
+    color: green;
+}
+.h1 {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+}
