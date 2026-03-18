@@ -1,8 +1,8 @@
 import {React, useState, useEffect} from "react";
-import "./APIfetch.css";
-import BasicExample from "./SearchMenu";
+import "./CardFetch.css";
+import BasicExampleCard from "./SearchMenu";
 
-const APIfetch = ({keyword}) => {
+const CardFetch = ({keyword}) => {
     const [items,setItems] = useState(null);
     const [dataLoaded, setDataLoaded] = useState(false);
     useEffect(() => {
@@ -19,7 +19,7 @@ const APIfetch = ({keyword}) => {
     const extractedMoves = items?.moves.map(items => items?.move.name);
         return (
                 <div className="App">
-                    <h1 className="pokeFetch">TCGdev card</h1>
+                    <h1 className="pokeFetch">Pokemon</h1>
                     <div className="container">
                         {dataLoaded && items && (
                             <div className="item">
@@ -30,16 +30,10 @@ const APIfetch = ({keyword}) => {
                                 {items.sprites && (
                                     <img src={items.sprites.front_default} alt={items.name} />
                                 )}
-                                <div style={{ marginTop: '20px', width: '100%' }}>
-                            <BasicExample 
-                                abilities={extractedAbilities} 
-                                moves={extractedMoves} 
-                            />
-                        </div>
                             </div>
                         )}
                     </div>
                 </div>
             );
 };
-export default APIfetch;
+export default CardFetch;

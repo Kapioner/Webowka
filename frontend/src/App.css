@@ -1,9 +1,9 @@
 .SearchBar {
     display: flex;
-    height: 100vh;
     width: 100%;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
+    margin: 30px 0;
     row-gap: 20px;
 }
 .h1 {
