@@ -1,6 +1,8 @@
 import {React, useState, useEffect} from "react";
 import "./CardFetch.css";
 import BasicExampleCard from "./SearchMenu";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const CardFetch = ({keyword}) => {
 
@@ -8,6 +10,7 @@ const CardFetch = ({keyword}) => {
     const [dataLoaded, setDataLoaded] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const cardsPerPage = 20;
+    const [lightboxIndex, setLightboxIndex] = useState(-1);
 
     useEffect(() => {
         fetch(`https://api.tcgdex.net/v2/en/cards?name=eq:${keyword}`)
@@ -24,8 +27,8 @@ const CardFetch = ({keyword}) => {
         <div className="App">
             <h1 className="pokeFetch">TcgDev card</h1>
             <div className="container">
-                {dataLoaded && currentCards.map((card) => (
-                    <div className="item" key={card.id}>
+                {dataLoaded && currentCards.map((card, index) => (
+                    <div className="item" key={card.id} onClick={() => setLightboxIndex(index)} style={{ cursor: 'pointer' }}>
                         <ul>
                             <li><strong>ID:</strong> {card.id}</li>
                             <li><strong>Name:</strong> {card.name}</li>
@@ -35,6 +38,15 @@ const CardFetch = ({keyword}) => {
                         )}
                     </div>
                 ))}
+                <Lightbox
+                    open={lightboxIndex >= 0}
+                    index={lightboxIndex}
+                    close={() => setLightboxIndex(-1)}
+                    slides={currentCards.map((card) => ({
+                        src: `${card.image}/high.jpg`,
+                        alt: card.name,
+                    }))}
+                />
             </div>
             <div className="pagination">
                 <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
