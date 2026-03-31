@@ -3,37 +3,49 @@ import "./CardFetch.css";
 import BasicExampleCard from "./SearchMenu";
 
 const CardFetch = ({keyword}) => {
-    const [items,setItems] = useState(null);
+
+    const [items,setItems] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const cardsPerPage = 20;
+
     useEffect(() => {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${keyword}`)
+        fetch(`https://api.tcgdex.net/v2/en/cards?name=eq:${keyword}`)
         .then((res) => res.json())
         .then((json) => {
-            setItems(json);
-            setDataLoaded(true);
-            console.log(json);
-        });
+        const cardArray = Array.isArray(json) ? json : Object.values(json);
+        setItems(cardArray);
+        setDataLoaded(true);
+    });
     }, [keyword]);
-    const extractedAbilities = items?.abilities.map(items => items?.ability.name);
-        
-    const extractedMoves = items?.moves.map(items => items?.move.name);
-        return (
-                <div className="App">
-                    <h1 className="pokeFetch">Pokemon</h1>
-                    <div className="container">
-                        {dataLoaded && items && (
-                            <div className="item">
-                                <ul>
-                                    <li><strong>ID:</strong> {items.id}</li>
-                                    <li><strong>Name:</strong> {items.name}</li>
-                                </ul>
-                                {items.sprites && (
-                                    <img src={items.sprites.front_default} alt={items.name} />
-                                )}
-                            </div>
+    const totalPages = Math.ceil(items.length / cardsPerPage);
+    const currentCards = items.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+    return (
+        <div className="App">
+            <h1 className="pokeFetch">TcgDev card</h1>
+            <div className="container">
+                {dataLoaded && currentCards.map((card) => (
+                    <div className="item" key={card.id}>
+                        <ul>
+                            <li><strong>ID:</strong> {card.id}</li>
+                            <li><strong>Name:</strong> {card.name}</li>
+                        </ul>
+                        {card.image && (
+                            <img src={`${card.image}/high.jpg`} alt={card.name} />
                         )}
                     </div>
-                </div>
-            );
-};
-export default CardFetch;
+                ))}
+            </div>
+            <div className="pagination">
+                <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
+                    Prev
+                </button>
+                <span>{currentPage} / {totalPages}</span>
+                <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
+                    Next
+                </button>
+            </div>
+        </div>
+    );
+    };
+    export default CardFetch;

@@ -14,3 +14,15 @@
     flex-direction: column;
     row-gap: 20px;
 }
+
+.Separation {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.Separation > * {
+    flex: 1;
+}
+

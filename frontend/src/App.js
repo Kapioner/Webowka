@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import "./App.css";
 import APIfetch from "./APIfetch";
+import CardFetch from "./CardFetch";
 const SearchBar = ({keyword, onChange, searchSubmit}) => {
   return(
 <form onSubmit={searchSubmit} className="SearchBar">
@@ -16,11 +17,9 @@ const SearchBar = ({keyword, onChange, searchSubmit}) => {
 const App = () => {
   const [searchVar, setSearchVar] = useState("Charizard");
   const [submittedWord, setSubmittedWord] = useState("Charizard");
-  const [edge, setEdge] = useState(false);
   const handleSearch = (e) => {
     e.preventDefault(); 
     setSubmittedWord(searchVar); 
-    setEdge(true);
   };
   return(
     <div>
@@ -30,7 +29,10 @@ const App = () => {
         onChange={setSearchVar}
         searchSubmit={handleSearch} 
       />
-      {edge && <APIfetch keyword={submittedWord} />}
+      <div className="Separation">
+      <APIfetch keyword={submittedWord} />
+      <CardFetch keyword={submittedWord} />
+      </div>
     </div>
   );
 }

@@ -1,12 +1,22 @@
 import Accordion from 'react-bootstrap/Accordion';
 
-function BasicExample({ evolution_tree, abilities, moves }) {
+function BasicExample({ types, abilities, moves }) {
   return (
-    <Accordion defaultActiveKey="0" flush>
+    <Accordion defaultActiveKey="0" flush alwaysOpen>
       <Accordion.Item eventKey="0">
-        <Accordion.Header>Evolution Tree</Accordion.Header>
+        <Accordion.Header>Types</Accordion.Header>
         <Accordion.Body>
-          <p>Dane o ewolucjach wymagają dodatkowego połączenia z API (evolution_chain).</p>
+          {types?.length > 0 ? (
+            <ul>
+              {types.map((TypeName, index) => (
+                <li key={index} style={{ textTransform: 'capitalize' }}>
+                  {TypeName.replace('-', ' ')}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Brak danych o typach.</p>
+          )}
         </Accordion.Body>
       </Accordion.Item>
 
