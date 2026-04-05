@@ -5,13 +5,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import BasicExample from "./SearchMenu";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ClerkProvider } from '@clerk/clerk-react';
+import LoginPanel from './LoginPanel';
 /*const express = require("express");
 const app = express();
 const cors = require("cors");
 app.use(cors());*/
+
+const PUBLISHABLE_KEY = "pk_test_ZGVsaWNhdGUtZG9lLTgwLmNsZXJrLmFjY291bnRzLmRldiQ"
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <LoginPanel />
+    </ClerkProvider>
     <App />
   </React.StrictMode>
 );

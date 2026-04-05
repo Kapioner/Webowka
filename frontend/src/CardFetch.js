@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from "react";
 import "./CardFetch.css";
-import BasicExampleCard from "./SearchMenu";
+import BasicExample from "./SearchMenu";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
