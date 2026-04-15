@@ -4,6 +4,11 @@ import BasicExample from "./SearchMenu";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
+const addToCollection = (card) => {
+    const Parameters = Array.isArray(card.id,card.name,card.image)
+
+}
+
 const CardFetch = ({keyword}) => {
 
     const [items,setItems] = useState([]);
@@ -11,6 +16,7 @@ const CardFetch = ({keyword}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const cardsPerPage = 20;
     const [lightboxIndex, setLightboxIndex] = useState(-1);
+    const [myArray,setMyArray] = useState([]);
 
     useEffect(() => {
         fetch(`https://api.tcgdex.net/v2/en/cards?name=eq:${keyword}`)
@@ -26,18 +32,29 @@ const CardFetch = ({keyword}) => {
     return (
         <div className="App">
             <h1 className="pokeFetch">TcgDev card</h1>
+            <div className = "containerAndButton">
             <div className="container">
                 {dataLoaded && currentCards.map((card, index) => (
-                    <div className="item" key={card.id} onClick={() => setLightboxIndex(index)} style={{ cursor: 'pointer' }}>
+                    <div className="item" key={card.id}>
                         <ul>
                             <li><strong>ID:</strong> {card.id}</li>
                             <li><strong>Name:</strong> {card.name}</li>
                         </ul>
                         {card.image && (
-                            <img src={`${card.image}/high.jpg`} alt={card.name} />
+                            <img src={`${card.image}/high.jpg`} alt={card.name}  onClick={() => setLightboxIndex(index)} style={{ cursor: 'pointer' }}/>
                         )}
-                    </div>
+                        <button onClick={() => {
+                                myArray.push({
+                                    id: card.id,
+                                    name: card.name,
+                                });
+                                console.log(myArray);
+                }}>
+        Add Card To Collection
+            </button>
+            </div>
                 ))}
+                <div className = "lightbox">
                 <Lightbox
                     open={lightboxIndex >= 0}
                     index={lightboxIndex}
@@ -47,6 +64,7 @@ const CardFetch = ({keyword}) => {
                         alt: card.name,
                     }))}
                 />
+                </div>
             </div>
             <div className="pagination">
                 <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
@@ -56,6 +74,7 @@ const CardFetch = ({keyword}) => {
                 <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
                     Next
                 </button>
+                </div>
             </div>
         </div>
     );

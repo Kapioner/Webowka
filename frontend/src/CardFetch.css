@@ -25,3 +25,12 @@
     border-radius: 10px;
     margin-top: 10px;
 }
+
+.addButton {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 50%;
+    margin: 0 auto;
+}

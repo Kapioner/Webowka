@@ -1,6 +1,8 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react"
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { React, useState } from "react";
 
 export default function LoginPanel() {
+  const [activeView, setActiveView] = useState('main');
   return (
     <div className="app-container">
       <header style={{ 
@@ -22,13 +24,23 @@ export default function LoginPanel() {
                 borderRadius: '5px',
                 cursor: 'pointer',
                 fontWeight: 'bold'
-              }}>
+              }} onClick={() => setActiveView('main')}>
                 Login / Register
               </button>
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <button style={{
+                padding: '10px 20px',
+                backgroundColor: '#007bff',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }} onClick={() => setActiveView('collection')}>
+                Open Panel
+              </button>
           </SignedIn>
         </div>
       </header>
@@ -36,12 +48,6 @@ export default function LoginPanel() {
         <SignedOut>
           <h2> Please login in order to manage your collection and add new cards</h2>
         </SignedOut>
-        <SignedIn>
-          <div>
-            <h2>Only visible to logged in users :| </h2>
-          </div>
-        </SignedIn>
-
       </main>
     </div>
   )
