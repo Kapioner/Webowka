@@ -22,8 +22,15 @@ const App = () => {
     setSubmittedWord(searchVar); 
   };
   return(
-    <div>
-      <h1>Wpisano {searchVar}</h1>
+     <div style={{
+    margin: '20px auto',
+    maxWidth: '1600px',
+    background: 'rgba(50, 50, 50, 0.85)',
+    borderRadius: '12px',
+    padding: '20px',
+    backdropFilter: 'blur(2x)',
+    }}>
+      <h1 style={{ margin: 0, color: 'white' }}>Wpisano {searchVar}</h1>
       <SearchBar
         keyword={searchVar}
         onChange={setSearchVar}

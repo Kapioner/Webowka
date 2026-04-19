@@ -16,7 +16,7 @@ export default function LoginPanel() {
         padding: '20px',
         borderBottom: '1px solid #eaeaea'
       }}>
-        <h1 style={{ margin: 0 }}>Pokemon Card Collector</h1>
+        <h1 style={{ margin: 0, color: 'white' }}>Pokemon Card Collector</h1>
         <div>
           <SignedOut>
             <SignInButton mode="modal">

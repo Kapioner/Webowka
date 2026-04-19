@@ -21,7 +21,7 @@ const APIfetch = ({keyword}) => {
     const extractedMoves = items?.moves.map(items => items?.move.name);
         return (
                 <div className="App">
-                    <h1 className="pokeFetch">Pokemon</h1>
+                    <h1 className="pokeFetch" style={{ margin: 0, color: 'cyan' }}>Pokemon</h1>
                     <div className="pokemon-container">
                         {dataLoaded && items && (
                             <div className="pokemon-item">

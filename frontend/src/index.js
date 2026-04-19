@@ -21,11 +21,18 @@ root.render(
   <React.StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <BrowserRouter>
+      <div style={{
+    margin: '20px auto',
+    maxWidth: '1600px',
+    borderRadius: '12px',
+    padding: '20px',
+  }}>
         <LoginPanel />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/collection" element={<CollectionPage />} />
         </Routes>
+        </div>
       </BrowserRouter>
     </ClerkProvider>
   </React.StrictMode>

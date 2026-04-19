@@ -8,6 +8,15 @@
     row-gap: 20px;
 }
 
+input {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white; /* so the typed text is visible */
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255);
+}
+
 /*Formatowanie dla nagłówków */
 .h1 {
     display: flex;
@@ -28,7 +37,7 @@
 .Separation > * {
     flex: 1;
 }
-/* Renderowanie obrazka z blurem */
+/* Renderowanie obrazka z blurem jako background(Pod resztą styli)*/
 body::before {
   content: '';
   position: fixed;

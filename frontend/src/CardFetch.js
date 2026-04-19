@@ -3,14 +3,18 @@ import "./CardFetch.css";
 import BasicExample from "./SearchMenu";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import LoginPanel from "./LoginPanel";
 
-const CardFetch = ({keyword,currentView}) => {
+const addToCollection = (card) => {
+    const Parameters = Array.isArray(card.id,card.name,card.image)
+
+}
+
+const CardFetch = ({keyword}) => {
 
     const [items,setItems] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const cardsPerPage = 20;
+    const cardsPerPage = 12;
     const [lightboxIndex, setLightboxIndex] = useState(-1);
     const [myArray,setMyArray] = useState([]);
 
@@ -27,7 +31,7 @@ const CardFetch = ({keyword,currentView}) => {
     const currentCards = items.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
     return (
         <div className="App">
-            <h1 className="pokeFetch">TcgDev card</h1>
+            <h1 className="pokeFetch" style={{ margin: 0, color: 'cyan' }}> TcgDev card</h1>
             <div className = "containerAndButton">
             <div className="container">
                 {dataLoaded && currentCards.map((card, index) => (
@@ -40,15 +44,16 @@ const CardFetch = ({keyword,currentView}) => {
                             <img src={`${card.image}/high.jpg`} alt={card.name}  onClick={() => setLightboxIndex(index)} style={{ cursor: 'pointer' }}/>
                         )}
                         <button onClick={() => {
-                                myArray.push({
-                                    id: card.id,
-                                    name: card.name,
-                                });
-                                console.log(myArray);
-                }}>
-        Add Card To Collection
-            </button>
-            </div>
+                            fetch('http://backend_add_to_collection', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ name: card.name }),
+                            })
+                            .then(res => res.json())
+                            }}>
+                    Add Card To Collection
+                    </button>
+                </div>
                 ))}
                 <div className = "lightbox">
                 <Lightbox
@@ -66,7 +71,7 @@ const CardFetch = ({keyword,currentView}) => {
                 <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
                     Prev
                 </button>
-                <span>{currentPage} / {totalPages}</span>
+                <span style={{ margin: 0, color: 'white' }}>{currentPage} / {totalPages}</span>
                 <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
                     Next
                 </button>

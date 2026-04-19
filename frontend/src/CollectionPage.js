@@ -11,7 +11,7 @@ const CollectionPage = () => {
 
   return (
     <div>
-      <h1>My Collection</h1>
+      <h1 style={{ margin: 0, color: 'white' }}>My Collection</h1>
       <div className="container">
         {cards.map((card, index) => (
           <div key={index} className="item">
@@ -19,7 +19,7 @@ const CollectionPage = () => {
             {card.image && <img src={`${card.image}/high.jpg`} alt={card.name} />}
           </div>
         ))}
-        {cards.length === 0 && <p>No cards in your collection</p>}
+        {cards.length === 0 && <p style={{ margin: 0, color: 'white' }}>No cards in your collection</p>}
       </div>
     </div>
   );

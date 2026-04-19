@@ -10,7 +10,7 @@
 .item {
     width: calc(25% - 20px);
     text-align: left;
-    background-color: #f4f4f9;
+    background-color: rgba(244, 244, 249, 0.7);
     padding: 20px;
     display: flex;
     flex-direction: column;
