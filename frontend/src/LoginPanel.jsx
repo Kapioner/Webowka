@@ -1,8 +1,12 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import { React, useState } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function LoginPanel() {
-  const [activeView, setActiveView] = useState('main');
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const inCollection = location.pathname === '/collection';
   return (
     <div className="app-container">
       <header style={{ 
@@ -24,7 +28,9 @@ export default function LoginPanel() {
                 borderRadius: '5px',
                 cursor: 'pointer',
                 fontWeight: 'bold'
-              }} onClick={() => setActiveView('main')}>
+              }} onClick={() => {
+  navigate('/');
+}}>
                 Login / Register
               </button>
             </SignInButton>
@@ -38,9 +44,9 @@ export default function LoginPanel() {
                 borderRadius: '5px',
                 cursor: 'pointer',
                 fontWeight: 'bold'
-              }} onClick={() => setActiveView('collection')}>
-                Open Panel
-              </button>
+              }} onClick={() => navigate(inCollection ? '/' : '/collection')}>
+      {inCollection ? 'Go Back' : 'Open Panel'}
+    </button>
           </SignedIn>
         </div>
       </header>

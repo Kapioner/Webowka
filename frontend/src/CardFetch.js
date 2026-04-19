@@ -3,13 +3,9 @@ import "./CardFetch.css";
 import BasicExample from "./SearchMenu";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import LoginPanel from "./LoginPanel";
 
-const addToCollection = (card) => {
-    const Parameters = Array.isArray(card.id,card.name,card.image)
-
-}
-
-const CardFetch = ({keyword}) => {
+const CardFetch = ({keyword,currentView}) => {
 
     const [items,setItems] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);

@@ -10,6 +10,7 @@
 
 .pokemon-item {
     width: 500px;
+    max-width: 100%;
     text-align: left;
     background-color: #f4f4f9;
     padding: 20px;

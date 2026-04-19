@@ -1,3 +1,4 @@
+/*Formatowanie dla paska wyszukiwania */
 .SearchBar {
     display: flex;
     width: 100%;
@@ -6,6 +7,8 @@
     margin: 30px 0;
     row-gap: 20px;
 }
+
+/*Formatowanie dla nagłówków */
 .h1 {
     display: flex;
     height: 100vh;
@@ -15,14 +18,25 @@
     row-gap: 20px;
 }
 
+/*Sepracja elementów */
 .Separation {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
 }
-
 .Separation > * {
     flex: 1;
 }
-
+/* Renderowanie obrazka z blurem */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  transform: scale(1.05);
+}

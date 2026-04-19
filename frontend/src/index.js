@@ -7,6 +7,8 @@ import BasicExample from "./SearchMenu";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ClerkProvider } from '@clerk/clerk-react';
 import LoginPanel from './LoginPanel';
+import CollectionPage from './CollectionPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 /*const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -18,9 +20,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <LoginPanel />
+      <BrowserRouter>
+        <LoginPanel />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/collection" element={<CollectionPage />} />
+        </Routes>
+      </BrowserRouter>
     </ClerkProvider>
-    <App />
   </React.StrictMode>
 );
 
